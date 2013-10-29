@@ -1,16 +1,19 @@
 class PointGuard:
     "Point guard class"
     abbrev = "PG"
+    positionCount = 0
     
     #def __init__(self, n = "New Player", v = 0):
     def __init__(self, name, value):
         self.name = name
         self.position = "PG"
-        self.value = input("Enter value: ")
-        self.__salary__ = 10000
+        self.value = value
+        self.__salary = 10000           #hidden to public, visible using miami1._PointGuard__salary
+        PointGuard.positionCount += 1
         
-    def printObj(self):
-        print self.value, " | ", self.position, " | ", self.name
+    def __str__(self):
+        return "Pos | Val | Name\n %s | %d | %s" \
+        %(self.position, self.value, self.name)
         
     def setName(self, name):
         self.name = name
