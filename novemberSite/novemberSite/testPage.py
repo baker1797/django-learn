@@ -11,7 +11,6 @@ miami2 = playerPos.PointGuard("Norris Cole", 60)
 print miami1
 print miami2
 
-
 ##Variable Setup
 #x = 3
 #y = 3
