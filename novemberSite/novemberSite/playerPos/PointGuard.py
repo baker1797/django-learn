@@ -19,4 +19,4 @@ class PointGuard:
         self.name = name
         
 def shootBall():
-    print "shoot the ball"
+    print "Shoot the ball!"
