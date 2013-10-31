@@ -6,3 +6,6 @@ def index(request):
 
 def anotherPage(request):
     return HttpResponse("Hello, world. You're at more.")
+
+def detail(request, poll_id):
+    return HttpResponse
