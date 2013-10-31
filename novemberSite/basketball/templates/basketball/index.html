@@ -1,0 +1,19 @@
+{% if teams %}
+    {% for t in teams %}
+    <div style="border:1px dotted #990000; float: left; width: 25%; height: 250px;">
+        <h4 style="margin:0">{{ t.city }}</h4>
+        <h2 style="margin:0">{{ t.name }}</h2>
+        
+        <!-- Output team's players -->
+        <ul>
+            {% for p in t.player_set.all %}
+            <li>
+                <a href="{% url 'basketball:player_card' p.id %}">{{ p.first_name }} {{ p.last_name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+{% else %}
+    <p>No Teams were found...</p>
+{% endif %}
