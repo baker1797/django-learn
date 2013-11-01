@@ -1,17 +1,18 @@
 <h1>{{ poll.question }}</h1>
-<em>Somewhat working percentage graphic</em>
 
-<table style="width: 300px; margin: 20px;">
+<table style="width: 300px; margin: 20px; border-collapse: collapse;"border="1">
     {% for choice in poll.choice_set.all %}
     <tr>
         <td>{{ choice.choice_text }}</td>
+        <td>{{ choice.votes }} vote{{ choice.votes|pluralize }}</td>
+        <td width="100">
+            <div style="background-color: #333399; width: {{ choice.percentage }}%; display: inline-block">&nbsp;</div>
+        </td>
         <td>
-            {{ choice.votes }} votes: 
-            <div style="background-color: #cccccc; width: {{ choice.percentage }}%; display: inline-block">&nbsp;</div>
-            <div style="display: inline-block">{{ choice.percentage }}%</div>
+            <div style="display: inline-block; text-align: right;">{{ choice.percentage }}%</div>
         </td>
     </tr>
     {% endfor %}
 </table>
-
-<a href="{% url 'polls:detail' poll.id %}">Vote Again?</a>
+<a href="{% url 'polls:detail' poll.id %}">Vote Again?</a><br><br>
+<a href="{% url 'polls:index' %}">Return to List of Polls</a>

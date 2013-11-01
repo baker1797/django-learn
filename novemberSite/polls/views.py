@@ -19,25 +19,20 @@ def anotherPage(request):
 class DetailView(generic.DetailView):
     model = Poll
     template_name = 'polls/detail.html'
-
-class ResultsView(generic.DetailView):
-    model = Poll
-    template_name = 'polls/results.html'
     
 #def detail(request, poll_id):
 #    poll = get_object_or_404(Poll, pk=poll_id)
 #    return render(request, 'polls/detail.html', {'poll': poll})
 #
-#def results(request, poll_id):
-#    "Display the poll's results after processing the data"
-#    poll = get_object_or_404(Poll, pk=poll_id)
-#    
-#    #collect the total number of votes to calculate percentages
-#    totalVotes = 0
-#    for choice in poll.choice_set.all():
-#        totalVotes += choice.votes
-#    
-#    return render(request, 'polls/results.html', {'poll': poll, 'totalVotes': totalVotes})
+
+def results(request, poll_id):
+    "Display the poll's results after processing the data"
+    poll = get_object_or_404(Poll, pk=poll_id)
+    
+    for choice in poll.choice_set.all():
+        choice.setPercentage(poll.total_votes)
+
+    return render(request, 'polls/results.html', {'poll': poll, 'total_votes': poll.total_votes})
 
 def vote(request, poll_id):
     "Handle the vote submission after a user completes a poll"
@@ -53,4 +48,6 @@ def vote(request, poll_id):
     else:
         selected_choice.votes += 1
         selected_choice.save()
+        p.total_votes += 1
+        p.save()
         return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))

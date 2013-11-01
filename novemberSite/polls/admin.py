@@ -7,13 +7,13 @@ class ChoiceInLine(admin.TabularInline):
 
 class PollAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('Poll Title', {'fields': ['question']}),
+        ('Poll Info', {'fields': ['question', 'total_votes']}),
         ('Date Information', {'fields': ['pub_date'], 'classes': ['collapse']})
     ]
     inlines = [ChoiceInLine]
     
     #Changes the display on the "change list page"
-    list_display = ('question', 'pub_date', 'was_published_recently')   #column headings for each entry
+    list_display = ('question', 'total_votes', 'pub_date', 'was_published_recently')   #column headings for each entry
     list_filter = ['pub_date']      #adds filter window on right
     search_fields = ['question']    #adds a search box
     #date_hierarchy = 'pub_date'

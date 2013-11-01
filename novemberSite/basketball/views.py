@@ -1,13 +1,11 @@
 from django.shortcuts import render
 
-#from basketball.models import Team, Player
 from basketball.models import Team, Player
-
 
 def index(request):
     context = {
         'teams': Team.objects.order_by('city'),
-        'players': Player.objects.all()
+        'players': Player.objects.all(),
     }
     return render(request, 'basketball/index.html', context)
 
