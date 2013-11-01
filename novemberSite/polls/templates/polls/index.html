@@ -1,11 +1,33 @@
-{% if latest_poll_list %}
-    <ul>
-    {% for poll in latest_poll_list %}
-        <li>
-            <a href="{% url 'polls:detail' poll.id %}">{{ poll.question }}</a>
-        </li>
-    {% endfor %}    
-    </ul>
-{% else %}
-    <p>There are no latest polls</p>
-{% endif %}
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+
+<div id="container">
+
+    <header id="content-header">
+        <h1>Latest Polls</h1>
+    </header>
+    <!--End Header -->
+    
+    <!--Start Body -->
+    <div id="content-body">
+        {% if latest_poll_list %}
+            <ul>
+            {% for poll in latest_poll_list %}
+                <li>
+                    <a href="{% url 'polls:detail' poll.id %}">{{ poll.question }}</a>
+                </li>
+            {% endfor %}    
+            </ul>
+        {% else %}
+            <p>There are no latest polls</p>
+    {% endif %}
+    </div>
+    <!-- End Body -->
+    
+    <!-- Start Footer -->
+    <footer id="content-footer">
+        <a href="{% url 'basketball:index' %}">Check out rosters</a>
+    </footer>
+
+</div>

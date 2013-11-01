@@ -1,6 +1,10 @@
+{% load staticfiles %}
+<!--
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+-->
 {% if teams %}
     {% for t in teams %}
-    <div style="border:1px dotted #990000; float: left; width: 25%; height: 250px;">
+    <div style="border:1px dotted #990000; float: left; width: 25%; height: 250px; background: url('{% static "basketball/images/logo-philadelphia.jpg" %}') center;"><!--background: url('images/logo-{{team.city}}.jpg') center;">-->
         <h4 style="margin:0">{{ t.city }}</h4>
         <h2 style="margin:0">{{ t.name }}</h2>
         
@@ -13,6 +17,18 @@
             {% endfor %}
         </ul>
     </div>
+    
+    <img src="{% static 'basketball/images/logo-philadelphia.jpg' %}">
+    <img src="{% static 'images/logo-philadelphia.jpg' %}">
+    <img src="{% static 'basketball/logo-philadelphia.jpg' %}">
+    <img src="{% static 'logo-philadelphia.jpg' %}">
+    <img src="{% static 'images/basketball/logo-philadelphia.jpg' %}">
+    <img src="{% static 'basketball/images/logo-philadelphia.jpg' %}">
+    <img src="{% static 'basketball/images/logo-philadelphia.jpg' %}">
+    <img src="{% static 'basketball/images/logo-philadelphia.jpg' %}">
+        
+    <img src="../../static/basketball/images/logo-philadelphia.jpg">
+    
     {% endfor %}
 {% else %}
     <p>No Teams were found</p>
