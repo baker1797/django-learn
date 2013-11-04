@@ -1,6 +1,6 @@
 body {
     background: url("images/background-players.jpg") no-repeat top;
-    background-size:100%;
+    background-size:cover;
 }
 li a {
     color: green;

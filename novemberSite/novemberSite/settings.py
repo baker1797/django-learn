@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'polls',
     'basketball',
+    'trades',
 )
 
 MIDDLEWARE_CLASSES = (
