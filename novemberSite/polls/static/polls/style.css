@@ -1,0 +1,31 @@
+body {
+    background: url("images/background-players.jpg") no-repeat top;
+    background-size:100%;
+}
+li a {
+    color: green;
+}
+#container {
+    background: white;
+    width: 960px;
+    margin: auto;
+    opacity:0.8;
+    filter:alpha(opacity=80); /* For IE8 and earlier */
+    padding: 15px;
+    border-radius: 15px;
+}
+#content-header, #content-body, #content-footer {
+    width: 100%;
+    margin: 10px auto;
+    /*padding: 5px; 
+    background: grey;*/
+    
+}
+#content-header {
+}
+#content-body {
+    
+}
+#content-footer {
+    
+}
