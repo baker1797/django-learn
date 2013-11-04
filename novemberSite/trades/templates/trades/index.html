@@ -1,0 +1,12 @@
+<h1>Trade Calculator</h1>
+<em>Select a team to trade with:</em>
+<form>
+    {% for team in teams %}
+    
+        <input type="checkbox" value="{{ team.id }}" name="team-{{ team.id }}">
+        <label for="team-{{ team.id }}">{{ team.name }}</label>
+        <br>
+    
+    {% endfor %}
+    <button type="submit" style="background-color: #000066; padding: 8px 15px; color: white;">Trade</button>
+</form>
