@@ -44,8 +44,8 @@
             {% csrf_token %}
             {% for team in teams %}
             
-                <input type="radio" name="team" id="team-{{ forloop.counter }}" value="{{ team.id }}"> <!-- -{{ team.id }}">-->
-                <label for="team-{{ forloop.counter }}">{{ team.name }}</label>
+                <input type="radio" name="team" id="team-{{ forloop.counter }}" value="{{ team.id }}">
+                <label for="team-{{ forloop.counter }}"><a href="{% url 'trades:team' team.id %}">{{ team.name }}</a></label>
                 <br>
             
             {% endfor %}

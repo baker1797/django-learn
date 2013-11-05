@@ -1,5 +1,5 @@
 body {
-    background: url("images/background-players.jpg") no-repeat top;
+    background: url("images/background-players2.jpg") no-repeat top;
     background-size:cover;
 }
 li a {
@@ -24,4 +24,16 @@ li a {
     padding: 8px 15px;
     color: white;
     background: #000066;
+}
+#tradeEnviroTable {
+    width: 100%
+}
+#tradeEnviroTable td {
+    width: 6%;
+}
+#tradeEnviroTable td:first-child {
+    width: 4%;
+}
+#tradeEnviroTable td:nth-child(2) {
+    width: 24%;
 }

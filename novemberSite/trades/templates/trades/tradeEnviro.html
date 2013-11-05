@@ -5,29 +5,64 @@
     <h1>{{ team.name }}</h1>
     
     <!-- Player Table -->
-    <table>
+    <table id="tradeEnviroTable">
+        <thead>
+            <tr>
+            <th>Add?</th>
+            {% for item in stat_fields %}
+            <th>
+                {{ item }}
+            </th>
+            {% endfor %}
+            </tr>
+        </thead>
         {% for player in team.player_set.all %}
         <tr>
             <td>
                 <input type="checkbox" value="{{ player.name }}">
             </td>
             <td>
-                {{ player.name }}
+                <a href="/admin/trades/player/{{ player.id }}">{{ player.name }}</a>
             </td>
             <td>
                 {{ player.minutes }}
             </td>
             <td>
-                {{ player.minutes }}
+                {{ player.fgm }}
             </td>
-            
-            {% for item in player.values %}
             <td>
-                {{ item }}
+                {{ player.fga }}
             </td>
-            {% endfor %}
+            <td>
+                {{ player.fgp }}
+            </td>
+            <td>
+                {{ player.ftm }}
+            </td>
+            <td>
+                {{ player.fta }}
+            </td>
+            <td>
+                {{ player.ftp }}
+            </td>
+            <td>
+                {{ player.threes }}
+            </td>
+            <td>
+                {{ player.rebounds }}
+            </td>
+            <td>
+                {{ player.assists }}
+            </td>
+            <td>
+                {{ player.steals }}
+            </td>
+            <td>
+                {{ player.points }}
+            </td>
         </tr>
         {% endfor %}
     </table>
+    <br>
     <a href="{% url 'trades:index' %}">Back to team view</a>
 {% endblock %}
