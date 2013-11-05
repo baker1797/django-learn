@@ -2,8 +2,11 @@ body {
     background: url("images/background-players2.jpg") no-repeat top;
     background-size:cover;
 }
-li a {
-    color: green;
+form {
+    padding: 15px;
+}
+h1 {
+    margin-bottom: 20px;
 }
 #container {
     background: white;
@@ -11,8 +14,9 @@ li a {
     margin: auto;
     opacity:0.9;
     filter:alpha(opacity=90); /* For IE8 and earlier */
-    /*padding: 15px;*/
-    border-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 0px 5px 15px 8px #333333;
 }
 #container-kyle {
     width: 100%;
@@ -20,11 +24,14 @@ li a {
     /*padding: 5px; 
     background: grey;*/
 }
+
 #tradeBtn {
-    padding: 8px 15px;
+    margin: 10px 0;
+    padding: 4px 15px;
     color: white;
-    background: #000066;
+    background: #5b80b2;
 }
+
 #tradeEnviroTable {
     width: 100%
 }
@@ -36,4 +43,8 @@ li a {
 }
 #tradeEnviroTable td:nth-child(2) {
     width: 24%;
+}
+
+.menuFooterKyle {
+    margin: 20px 0 10px 0;
 }

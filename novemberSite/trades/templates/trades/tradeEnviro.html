@@ -4,65 +4,74 @@
     
     <h1>{{ team.name }}</h1>
     
-    <!-- Player Table -->
-    <table id="tradeEnviroTable">
-        <thead>
+    <form action="{% url 'trades:editPlayer' %}" method="post">
+        {% csrf_token %}
+            
+        <!-- Player Table -->
+        <table id="tradeEnviroTable">
+            <thead>
+                <tr>
+                <th>Add?</th>
+                {% for item in stat_fields %}
+                <th>
+                    {{ item }}
+                </th>
+                {% endfor %}
+                </tr>
+            </thead>
+            {% for player in team.player_set.all %}
             <tr>
-            <th>Add?</th>
-            {% for item in stat_fields %}
-            <th>
-                {{ item }}
-            </th>
-            {% endfor %}
+                <td>
+                    <input type="checkbox" value="{{ player.id }}" name="player_id">
+                </td>
+                <td>
+                    <a href="/admin/trades/player/{{ player.id }}">{{ player.name }}</a>
+                </td>
+                <td>
+                    {{ player.minutes }}
+                </td>
+                <td>
+                    {{ player.fgm }}
+                </td>
+                <td>
+                    {{ player.fga }}
+                </td>
+                <td>
+                    {{ player.fgp }}
+                </td>
+                <td>
+                    {{ player.ftm }}
+                </td>
+                <td>
+                    {{ player.fta }}
+                </td>
+                <td>
+                    {{ player.ftp }}
+                </td>
+                <td>
+                    {{ player.threes }}
+                </td>
+                <td>
+                    {{ player.rebounds }}
+                </td>
+                <td>
+                    {{ player.assists }}
+                </td>
+                <td>
+                    {{ player.steals }}
+                </td>
+                <td>
+                    {{ player.points }}
+                </td>
             </tr>
-        </thead>
-        {% for player in team.player_set.all %}
-        <tr>
-            <td>
-                <input type="checkbox" value="{{ player.name }}">
-            </td>
-            <td>
-                <a href="/admin/trades/player/{{ player.id }}">{{ player.name }}</a>
-            </td>
-            <td>
-                {{ player.minutes }}
-            </td>
-            <td>
-                {{ player.fgm }}
-            </td>
-            <td>
-                {{ player.fga }}
-            </td>
-            <td>
-                {{ player.fgp }}
-            </td>
-            <td>
-                {{ player.ftm }}
-            </td>
-            <td>
-                {{ player.fta }}
-            </td>
-            <td>
-                {{ player.ftp }}
-            </td>
-            <td>
-                {{ player.threes }}
-            </td>
-            <td>
-                {{ player.rebounds }}
-            </td>
-            <td>
-                {{ player.assists }}
-            </td>
-            <td>
-                {{ player.steals }}
-            </td>
-            <td>
-                {{ player.points }}
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+            {% endfor %}
+        </table>
+        <textarea name="stats_update" style="width: 100%">
+            Enter stats here from "Minutes" to "Points", tab delimited
+        </textarea>
+        
+        <input type="submit" value="Update">
+            
+    </form>
     <br>
-    <a href="{% url 'trades:index' %}">Back to team view</a>
 {% endblock %}
