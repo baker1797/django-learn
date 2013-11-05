@@ -1,0 +1,33 @@
+{% extends "trades/index.html" %}
+
+{% block Kyle-Content %}
+    
+    <h1>{{ team.name }}</h1>
+    
+    <!-- Player Table -->
+    <table>
+        {% for player in team.player_set.all %}
+        <tr>
+            <td>
+                <input type="checkbox" value="{{ player.name }}">
+            </td>
+            <td>
+                {{ player.name }}
+            </td>
+            <td>
+                {{ player.minutes }}
+            </td>
+            <td>
+                {{ player.minutes }}
+            </td>
+            
+            {% for item in player.values %}
+            <td>
+                {{ item }}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'trades:index' %}">Back to team view</a>
+{% endblock %}

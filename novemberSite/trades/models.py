@@ -57,4 +57,8 @@ class Player(models.Model):
     def __unicode__(self):
         return self.name
     
+    def attrs(self):
+        for field in self._meta.fields:
+            yield field.name, getattr(self, field.name)
+    
     

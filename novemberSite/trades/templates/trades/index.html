@@ -1,12 +1,58 @@
-<h1>Trade Calculator</h1>
-<em>Select a team to trade with:</em>
-<form>
-    {% for team in teams %}
+{% extends "admin/base_site.html" %}
+{% load staticfiles %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'trades/style.css' %}" />
+{% endblock %}
+
+{% block extrahead %}
+    <script type="text/javascript" src="{% static 'admin/js/jquery.js' %}"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'trades/jquery-1.10.2.min.js' %}"></script>
     
-        <input type="checkbox" value="{{ team.id }}" name="team-{{ team.id }}">
-        <label for="team-{{ team.id }}">{{ team.name }}</label>
-        <br>
+    <script type="text/javascript">
+        function fadeHeader() {
+            console.log("em");
+            //$("#tradeBtn").fadeToggle("fast", "linear");
+        }
+    </script>
+{% endblock %}
+
+
+{% block coltype %}{% endblock %}
+{% block bodyclass %}Kyle_body_style{% endblock %}
+{% block breadcrumbs %}{% endblock %}
+
+
+{% block content %}
     
-    {% endfor %}
-    <button type="submit" style="background-color: #000066; padding: 8px 15px; color: white;">Trade</button>
-</form>
+<script type="text/javascript">
+    $("h1").click(function(){
+        console.log("h1");
+    });
+</script>
+
+<div id="content-main">
+    <!--Start Kyle Container -->
+    <div id="container-kyle">
+    {%block Kyle-Content %}
+        <h1>Trade Calculator</h1>
+        <em onclick="fadeHeader()">Select a team to trade with:</em>
+        <form action="{% url 'trades:tradeEnviro' %}" method="post">
+            {% csrf_token %}
+            {% for team in teams %}
+            
+                <input type="radio" name="team" id="team-{{ forloop.counter }}" value="{{ team.id }}"> <!-- -{{ team.id }}">-->
+                <label for="team-{{ forloop.counter }}">{{ team.name }}</label>
+                <br>
+            
+            {% endfor %}
+            <input type="submit" id="tradeBtn" onclick="fadeHeader()" value="Start Trade">
+        </form>
+    {% endblock %}
+    </div>
+    <!-- End Kyle Container -->
+</div>
+{% endblock %}
