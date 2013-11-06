@@ -31,3 +31,4 @@ class PlayerAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Team, TeamAdmin)
 admin.site.register(Player)#, PlayerAdmin)
+#admin.site.register(StatLine)

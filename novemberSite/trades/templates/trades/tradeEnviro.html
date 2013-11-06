@@ -1,10 +1,13 @@
 {% extends "trades/index.html" %}
 
+{% block title %}Trade Environment{% endblock %}
+
 {% block Kyle-Content %}
     
     <h1>{{ team.name }}</h1>
+    <em>This will be the trade environment. Currently players can be updated. Eventually trade proposals can be evaluated</em>
     
-    <form action="{% url 'trades:editPlayer' %}" method="post">
+    <form action="{% url 'trades:editPlayer' team.id %}" method="post">
         {% csrf_token %}
             
         <!-- Player Table -->
@@ -22,10 +25,13 @@
             {% for player in team.player_set.all %}
             <tr>
                 <td>
-                    <input type="checkbox" value="{{ player.id }}" name="player_id">
+                    <input type="radio" value="{{ player.id }}" name="player_id">
                 </td>
                 <td>
                     <a href="/admin/trades/player/{{ player.id }}">{{ player.name }}</a>
+                </td>
+                <td>
+                    {{ player.position }}
                 </td>
                 <td>
                     {{ player.minutes }}
@@ -66,11 +72,9 @@
             </tr>
             {% endfor %}
         </table>
-        <textarea name="stats_update" style="width: 100%">
-            Enter stats here from "Minutes" to "Points", tab delimited
-        </textarea>
+        <textarea name="stats_update" style="width: 100%">Enter stats here from "Minutes" to "Points", tab delimited</textarea>
         
-        <input type="submit" value="Update">
+        <input type="submit" value="Update Player">
             
     </form>
     <br>

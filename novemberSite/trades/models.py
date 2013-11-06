@@ -25,6 +25,25 @@ from django.db import models
 #    def __unicode__(self):
 #        return "StatLine"
     
+    
+    
+    
+#class StatLine(models.Model):
+#    minutes = models.FloatField(default=0)
+#    fgm = models.FloatField(default=0)
+#    fga = models.FloatField(default=0)
+#    fgp = models.FloatField(default=0)
+#    ftm = models.FloatField(default=0)
+#    fta = models.FloatField(default=0)
+#    ftp = models.FloatField(default=0)
+#    threes = models.FloatField(default=0)
+#    rebounds = models.FloatField(default=0)
+#    assists = models.FloatField(default=0)
+#    steals = models.FloatField(default=0)
+#    blocks = models.FloatField(default=0)
+#    points = models.FloatField(default=0)
+
+
 class Team(models.Model):
     name = models.CharField(max_length=30)
     current_points = models.IntegerField(default=0)
@@ -37,28 +56,57 @@ class Team(models.Model):
 class Player(models.Model):
     name = models.CharField(max_length=40)
     team = models.ForeignKey(Team)
-    #position = models.CharField(max_length=10)
-    #stat_line = micromodels.ModelCollectionField(StatLine)
+    position = models.CharField(max_length=10)
     
-    minutes = models.IntegerField(default=0)
-    fgm = models.IntegerField(default=0)
-    fga = models.IntegerField(default=0)
-    fgp = models.IntegerField(default=0)
-    ftm = models.IntegerField(default=0)
-    fta = models.IntegerField(default=0)
-    ftp = models.IntegerField(default=0)
-    threes = models.IntegerField(default=0)
-    rebounds = models.IntegerField(default=0)
-    assists = models.IntegerField(default=0)
-    steals = models.IntegerField(default=0)
-    blocks = models.IntegerField(default=0)
-    points = models.IntegerField(default=0)
+    #stat_line = models.OneToOneField(StatLine)
+    
+    minutes = models.FloatField(default=0)
+    fgm = models.FloatField(default=0)
+    fga = models.FloatField(default=0)
+    fgp = models.FloatField(default=0)
+    ftm = models.FloatField(default=0)
+    fta = models.FloatField(default=0)
+    ftp = models.FloatField(default=0)
+    threes = models.FloatField(default=0)
+    rebounds = models.FloatField(default=0)
+    assists = models.FloatField(default=0)
+    steals = models.FloatField(default=0)
+    blocks = models.FloatField(default=0)
+    points = models.FloatField(default=0)
     
     def __unicode__(self):
         return self.name
     
-    def attrs(self):
-        for field in self._meta.fields:
-            yield field.name, getattr(self, field.name)
+    def update_stats(self, stat_line):
+        self.minutes = stat_line[0]
+        
+        fg = (stat_line[1]).split('/')
+        self.fgm = fg[0]
+        self.fga = fg[1]
+        self.fgp = stat_line[2]
+        
+        ft = (stat_line[3]).split('/')
+        self.ftm = ft[0]
+        self.fta = ft[1]
+        self.ftp = stat_line[4]
+        
+        self.threes = stat_line[5]
+        self.rebounds = stat_line[6]
+        self.assists = stat_line[7]
+        self.steals = stat_line[8]
+        self.blocks = stat_line[9]
+        self.points = stat_line[10]
+        self.save()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     

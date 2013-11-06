@@ -19,7 +19,7 @@ def team(request, team_id):
     return render(request, 'trades/team.html', {'team': team, 'roster': roster,})
 
 def tradeEnviro(request):
-    "Handle the vote submission after a user completes a poll"
+    "Display the team and roster to trade with"
     #t = get_object_or_404(Team, pk=request.POST['team'])
     
     try:
@@ -30,52 +30,61 @@ def tradeEnviro(request):
             'error_message': "You didn't select a team",
         })
     else:
-        stat_fields = ("Name", "Min.", "FGM", "FGA", "FG%", \
-                       "FTM", "FTA", "FT%", "3's", "Reb", "Assists", "Steals", "Pts")
+        stat_fields = ("Name", "Pos.", "Min.", "FGM", "FGA", "FG%", \
+                       "FTM", "FTA", "FT%", "3's", "Reb", "Assists", "Steals", "Blocks", "Pts")
         
         return render(request, 'trades/tradeEnviro.html', {'team': t, 'stat_fields': stat_fields})
-    
-#def editPlayer(request, player_id):
-def editPlayer(request):
+
+def editPlayer(request, team_id):
     "Edit a player's stat fields after submission"
     
-    player = get_object_or_404(Player, pk=request.POST['player_id'])
-    player.minutes = request.POST['stats_update']
-    context = {}
+    #Get the POST variables
+    try:
+        player = get_object_or_404(Player, pk=request.POST['player_id'])
+        stat_line = (request.POST['stats_update']).split('\t')
+        team = get_object_or_404(Team, pk=team_id)
+        
+    except(KeyError, Player.DoesNotExist):
+        return render(request, 'trades/index.html', {
+            'error_message': "You didn't select a team",
+        })
+    else:
+        #Update player's stats
+        if(len(stat_line) != 11):
+            pass
+        else:
+            player.update_stats(stat_line)
+            
+            
+            #player.minutes = stat_line[0]
+            #
+            #fg = (stat_line[1]).split('/')
+            #player.fgm = fg[0]
+            #player.fga = fg[1]
+            #player.fgp = stat_line[2]
+            #
+            #ft = (stat_line[3]).split('/')
+            #player.ftm = ft[0]
+            #player.fta = ft[1]
+            #player.ftp = stat_line[4]
+            #
+            #player.threes = stat_line[5]
+            #player.rebounds = stat_line[6]
+            #player.assists = stat_line[7]
+            #player.steals = stat_line[8]
+            #player.blocks = stat_line[9]
+            #player.points = stat_line[10]
+            #
+            player.save()
+            
+        context = {
+            'team': team,
+            'player': player,
+        }
     
     #return render(request, 'trades/team.html', {'team': team, 'roster': roster,})
     return render(request, 'trades/index.html', context)
 
 
     #return render(request, 'trades/editPlayer.html', {'player': player, 'stat_fields': stat_fields})
-
-    
-    
-    
-##########################
-##########################
-
-    #t = get_object_or_404(Team, pk=request.POST['team'])
-    #try:
-    #    t = t.player_set.get(pk=request.POST['team'])
-    #except(KeyError, Choice.DoesNotExist):
-    #    return render(request, 'polls/detail.html', {
-    #        'poll': p,
-    #        'error_message': "You didn't select a choice",
-    #    })
-    #else:
-    #    selected_choice.votes += 1
-    #    selected_choice.save()
-    #    p.total_votes += 1
-    #    p.save()
-    #    return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
-    
-    
-    #context = {
-    #    'teams': selected_team, #Team.objects.get(id=team_id),
-    ##    'players': Team.player_set.all(),
-    #}
-    #
-    ##return HttpResponseRedirect(reverse('trades:index', args=(t.id,)))
-    #return render(request, 'trades/team.html', context)
     

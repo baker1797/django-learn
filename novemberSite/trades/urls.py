@@ -11,5 +11,5 @@ urlpatterns = patterns('',
     url(r'^team/(?P<team_id>\d+)/$', views.team, name='team'),
     url(r'^tradeEnviro/$', views.tradeEnviro, name='tradeEnviro'),
     #url(r'^editPlayer/(?P<player_id>\d+)/$', views.editPlayer, name='editPlayer'),
-    url(r'^editPlayer/$', views.editPlayer, name='editPlayer'),
+    url(r'^(?P<team_id>\d+)/editPlayer/$', views.editPlayer, name='editPlayer'),
 )
